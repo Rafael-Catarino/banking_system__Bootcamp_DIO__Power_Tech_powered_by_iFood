@@ -26,19 +26,20 @@ def start_program():
             elif num == 1:
                 os.system("cls")
                 value = deposit()
-                bank_account += value
-                arr_extract.append(["Deposito", value])
+                if value > 0:
+                    bank_account += value
+                    arr_extract.append(["Deposito", value])
             elif num == 2:
                 os.system("cls")
                 if withdrawal_number >= WITHDRAWAL_LIMIT:
                     print("Seu limite de saque diário foi atingido.")
                     os.system("pause")
                 else:
-                    value = withdraw_money(bank_account)
-                    if not value <= 0:
+                    value = withdraw_money(bank_account=bank_account)
+                    if value > 0:
                         bank_account -= value
                         arr_extract.append(["Saque", value])
-                    else:
+                    elif value == 0 and value < 0:
                         print("Você não pode sacar valor igual a 0 ou menor que zero.")
                         os.system("pause")
                         withdrawal_number -= 1
